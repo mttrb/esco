@@ -1,0 +1,10 @@
+blankreader.o: blankreader.cpp ../config.h ../include/defs.h \
+  ../include/blankreader.h ../include/sourcereader.h
+
+../config.h:
+
+../include/defs.h:
+
+../include/blankreader.h:
+
+../include/sourcereader.h:

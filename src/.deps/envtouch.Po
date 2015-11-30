@@ -1,0 +1,5 @@
+envtouch.o: envtouch.cpp ../config.h ../include/envtouch.h
+
+../config.h:
+
+../include/envtouch.h:

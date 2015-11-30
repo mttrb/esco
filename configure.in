@@ -1,0 +1,191 @@
+dnl Esoteric Combine
+dnl License GPL-2
+
+AC_PREREQ(2.63)
+AC_INIT(esco, 0.513, d3fin3@gmail.com)
+AM_INIT_AUTOMAKE
+AC_CONFIG_SRCDIR([src/esco.cpp])
+AC_CONFIG_HEADER([config.h])
+
+AM_INIT_AUTOMAKE
+
+AC_PROG_LIBTOOL
+AC_PATH_PROG(escopath, esco)
+
+dnl Checks for programs.
+AC_PROG_CXX
+AC_PROG_AWK
+AC_PROG_CC
+AC_PROG_CPP
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
+AC_PROG_RANLIB
+
+AC_DEFINE(CC_HAS_PROTOS, 1, sads)
+
+dnl Checks for libraries.
+
+dnl Checks for getopt in standard library
+AC_CHECK_FUNCS(getopt_long,,
+[
+	AC_LIBOBJ(getopt)
+	AC_LIBOBJ(getopt1)
+])
+
+dnl Checks for header files.
+AC_HEADER_STDC
+AC_CHECK_HEADERS([string.h])
+
+dnl Checks for typedefs, structures, and compiler characteristics.
+AC_HEADER_STDBOOL
+AC_C_CONST
+AC_C_INLINE
+
+dnl Checks for library functions.
+AC_CHECK_FUNCS([memset strchr])
+
+dnl Arguments
+AC_ARG_ENABLE(interact-with-user,
+              [AC_HELP_STRING([--enable-interact-with-user],
+                              [ask user when some data doesn't specify (just Win32)]) ],
+              interact_with_user="$enableval",
+              interact_with_user="no"
+)
+
+AC_ARG_ENABLE(brainfuck,
+              [AC_HELP_STRING([--disable-brainfuck],[disable brainfuck support (also Spoon and Ook!)]) ],
+              brainfuck="$enableval",
+              brainfuck="yes"
+)
+
+AC_ARG_ENABLE(hq9,
+              [AC_HELP_STRING([--disable-hq9],[disable HQ9+ support])],
+              hq9="$enableval",
+              hq9="yes"
+)
+
+AC_ARG_ENABLE(whitespace,
+              [AC_HELP_STRING([--disable-whitespace],[disable WhiteSpace support])],
+              whitespace="$enableval",
+              whitespace="yes"
+)
+
+AC_ARG_ENABLE(befunge, 
+              [AC_HELP_STRING([--disable-befunge],[disable befunge-93 support])],
+              befunge="$enableval",
+              befunge="yes"
+)
+
+AC_ARG_ENABLE(byter,
+              [AC_HELP_STRING([--disable-byter],[disable byter support])],
+              byter="$enableval",
+              byter="yes"
+)
+
+AC_ARG_WITH(gmp,
+              [AC_HELP_STRING([--without-gmp],[build without gmp library])],
+              gmp="$withval",
+              gmp="yes"
+)
+
+AM_CONDITIONAL(ENABLE_BRAINFUCK, test "x$brainfuck" = "xyes")
+AM_CONDITIONAL(ENABLE_HQ9, test "x$hq9" = "xyes")
+AM_CONDITIONAL(ENABLE_WHITESPACE, test "x$whitespace" = "xyes")
+AM_CONDITIONAL(ENABLE_BEFUNGE, test "x$befunge" = "xyes")
+AM_CONDITIONAL(ENABLE_BYTER, test "x$byter" = "xyes")
+
+dnl Interact with user (Win32)
+
+if test "x$interact_with_user" = "xyes"; then
+    AC_DEFINE(INTERACT_WITH_USER, 1, [don't ask user for some data (Win32)])
+fi
+
+dnl Brainfuck
+
+if test "x$brainfuck" = "xyes"; then
+    AC_DEFINE(ENABLE_BRAINFUCK, 1, [build with brainfuck support])
+fi
+
+dnl HQ9+
+if test "x$hq9" = "xyes"; then
+    AC_DEFINE(ENABLE_HQ9, 1, [build with hq9+ support])
+fi
+
+dnl WhiteSpace+GMP
+
+if test "x$whitespace" = "xyes"; then
+    AC_DEFINE(ENABLE_WHITESPACE, 1, [build with WhiteSpace support])
+
+    AC_MSG_CHECKING(GMP library)
+    AC_MSG_RESULT($gmp)
+    dnl Whitespace needs GMP
+    if test "x$gmp" = "xyes"; then
+        AC_ARG_WITH(gmp-dir,
+                    AC_HELP_STRING([--with-gmp-dir=PATH], [GMP lib/include root]),
+                    [ case "$withval" in
+                     no)
+                        ;;
+                     *)
+                        CPPFLAGS="$CPPFLAGS -I$withval/include"
+                        LDFLAGS="$LDFLAGS -L$withval/lib"
+                        ;;
+                    esac ]
+        )
+
+        AC_CHECK_LIB("gmp", __gmpz_init,,AC_MSG_ERROR(
+                     [GMP library not found. Use --without-gmp])
+        )
+        gmp_warning="no"
+    else
+        gmp_warning="yes"
+    fi
+else
+    gmp_warning="no"
+fi
+
+dnl Befune support
+if test "x$befunge" = "xyes"; then
+    AC_DEFINE(ENABLE_BEFUNGE, 1, [build with befunge-93 support])
+fi
+
+dnl Byter support
+if test "x$byter" = "xyes"; then
+    AC_DEFINE(ENABLE_BYTER, 1, [build with byter support])
+fi
+
+CPPFLAGS="$CPPFLAGS -Wall"
+
+AC_CONFIG_FILES([Makefile
+                 docs/Makefile
+                 src/Makefile])
+
+AC_OUTPUT
+
+echo
+echo $PACKAGE $VERSION
+echo
+
+echo Build with Brainfuck.............: $brainfuck
+echo Build with HQ9+..................: $hq9
+echo Build with Whitespace............: $whitespace
+echo Build with Befunge-93............: $befunge
+echo Build with Byter.................: $byter
+echo 
+echo GMP..............................: $gmp
+echo
+echo Platform.........................: $host
+
+if test "x$gmp_warning" != "xno" ; then
+    echo "Warning: You'd better install gmp-mp (ftp.gnu.org/gnu/gmp) for full whitespace support with bignumbers. Currently using only the long C type."
+fi
+
+echo
+eval eval echo Esco will be installed in $bindir.
+if test "x$escopath" != "x" ; then
+    echo Warning: You have old copy of esco at $escopath.
+fi
+echo
+echo configure completed, now type \'make\' and pray
+echo
+

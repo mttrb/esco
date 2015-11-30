@@ -1,0 +1,34 @@
+version 0.512 (04/07/2011):
+	* Fixed copyright
+	* Fixed autotools
+	* Fixed bug in SpoonPreProcessor (#2897558)
+	* Fixed compilation error on 64-bit (#1923981)
+
+version 0.511 (02/10/2009):
+	* Bugs fixed for compilation with gcc 4.4.1
+	* Added --quiet (-q) option
+
+version 0.51 (12/31/2008):
+	* Bugs fixed for compilation with 4.3.2
+
+version 0.50 (01/31/2008):
+	* "Befunge-93" support added
+	* "Byter" support added
+
+version 0.30 (01/21/2008):
+	* Support of language WhiteSpace is added
+	* Program arguments changed
+	* Small fixes
+
+version 0.26:
+	* Memmory leaks fixed
+
+version 0.25:
+	* Support of language HQ9+ is added
+	* Structure rebuilded
+
+version 0.23:
+	* Changelog added
+	* Input and output to file
+	* Modified structure of some classes
+

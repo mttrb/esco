@@ -1,0 +1,2 @@
+SUBDIRS = src docs
+EXTRA_DIST = AUTHORS ChangeLog README

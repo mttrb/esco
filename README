@@ -1,0 +1,77 @@
+        --==esco v.0.513===--
+        -=ESoteric=COmbine=-
+        ********************
+
+Content:
+1. About
+2. People
+3. License
+4. Package
+5. Compilation/Run
+6. History
+7. Links
+8. Feedback
+
+1. About
+========
+esco is ESoteric COmbine.
+Primary aim of this project is a creation of combine interpreter able to
+execute as much as possible esoteric languages (1).
+This version supports Brainfuck, Ook, Spoon, HQ9+, WhiteSpace, Befunge-93,
+Byter, and Hodor!.
+
+2. People
+=========
+Author -- Zasenko Sergey (und3f@users.sourceforge.net)
+Developers:
+   Matthias Boehm (ma_boehm@users.sourceforge.net) -- whitespace, Befunge-93 and other improvements interpreters
+   Justin Mutter (j-mutter@users.sourceforge.net) -- Hodor!
+
+Thanks:
+	non3x (www.pcr.cc) -- general idea
+    Eugene Chernyshov -- some fixes
+
+3. License
+==========
+Released under GNU GPL v.2
+
+4. Package
+==========
+README*  - you're reading this
+src/     - all sources and Makefile (source pakage only)
+include/ - headers (source pakage only)
+scripts/ - some sources coded on esoteric languages
+esco.exe - executable binary file for win32 OS (win32 pakage only)
+
+5. Compilation/Run
+==========
+For Windows users: win32 version is already compiled, so if you use Windows
+you can jump to "Usage" section.
+
+For Unix users:
+./configure
+make
+make install
+make clean
+
+Usage:
+For Windows users: go to programm directory and type 'esco.exe'
+For Unix-like users: just type 'esco'
+
+6. History
+==========
+Primordial program was created as Brainfuck interpreter, but eventually author
+decided to work on extending of functionality.
+
+7. Links
+========
+1. EsCo homepage:
+http://esco.sourceforge.net/
+2. Esoteric programming languages:
+http://en.wikipedia.org/wiki/Esoteric_programming_language
+
+8. Feedback
+===========
+Post all esco-related questions, comments and discovered bugs on esco' page.
+An official page of program -- http://esco.sourceforge.net/
+

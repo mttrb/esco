@@ -1,0 +1,22 @@
+Structure:
+Every brainfuck-like machine (script executor) contains from next units:
+- machine (class BFMachine for brainfuck);
+- memory (class BFMemmory for braifuck);
+- user interaction classes to input and output data (EnvTouch classes);
+- Source - class which one create list of tied commands.
+
+All this units deliver to creator. For BF and BF-like languages - MachineCreater (sorry for mistake).
+MachineCreater returns machine type class which one is used to execute program step by step.
+
+Source:
+This class is used to transfer program source in esco' internal format.
+Program transfers by preprocessor classes. This classes called *PreProcessor (OokPreProcessor for Ook! language).
+PreProcessor used one of SourceReader classes to read source (FileReader - reads source from file);
+
+Finally to create machine you mast:
+Create SourceReader class with necessary method of reading;
+Create PreProcessor class for language;
+Create MachineCreater.
+MachineCreater->create() to get ready for action machine.
+
+Best regards.
