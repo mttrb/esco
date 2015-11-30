@@ -18,7 +18,7 @@ esco is ESoteric COmbine.
 Primary aim of this project is a creation of combine interpreter able to
 execute as much as possible esoteric languages (1).
 This version supports Brainfuck, Ook, Spoon, HQ9+, WhiteSpace, Befunge-93,
-Byter, and Hodor!.
+Byter, Hodor! and XD.
 
 2. People
 =========
@@ -26,6 +26,7 @@ Author -- Zasenko Sergey (und3f@users.sourceforge.net)
 Developers:
    Matthias Boehm (ma_boehm@users.sourceforge.net) -- whitespace, Befunge-93 and other improvements interpreters
    Justin Mutter (j-mutter@users.sourceforge.net) -- Hodor!
+   Matthew Robinson (matt@zensunni.org) -- XD
 
 Thanks:
 	non3x (www.pcr.cc) -- general idea
