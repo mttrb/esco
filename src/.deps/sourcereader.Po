@@ -1,8 +1,0 @@
-sourcereader.o: sourcereader.cpp ../config.h ../include/sourcereader.h \
-  ../include/defs.h
-
-../config.h:
-
-../include/sourcereader.h:
-
-../include/defs.h:
